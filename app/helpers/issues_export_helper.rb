@@ -5,8 +5,12 @@ module IssuesExportHelper
         if row.header_row?
           newcsv << row.fields + [t(:label_history)]
         else
-          newcsv << row.fields + Issue.find(row.fields.first).journals.map do |j| 
-            j.user.name + "\n" + j.details.map {|d| show_detail(d, true)}.join("\n") + "\n" + (j.notes.nil? ? '' :     j.notes)
+          Issue.find(row.fields.first).journals.each_with_index do |j, index|
+            if index == 0
+              newcsv << row.fields + [j.user.name + "\n" + j.details.map {|d| show_detail(d, true)}.join("\n") + "\n" + (j.notes.nil? ? '' :     j.notes)]
+            else
+              newcsv << ([""] * row.fields.length) + [j.user.name + "\n" + j.details.map {|d| show_detail(d, true)}.join("\n") + "\n" + (j.notes.nil? ? '' :     j.notes)]
+            end  
           end
         end
       end
