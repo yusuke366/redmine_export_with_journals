@@ -34,6 +34,6 @@ Installation
 ---------------------
 
 1. $ cd REDMINE_ROOT/plugins
-2. $ git clone https://github.com/suer/redmine_export_with_journals.git
-3. $ git checkout horizontal
+2. $ git clone https://github.com/shouta-dev/redmine_export_with_journals.git
+3. $ git checkout vertical
 4. restart redmine
